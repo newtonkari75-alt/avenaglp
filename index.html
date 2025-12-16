@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AvenaGLP - Metabolic Reset</title>
+    
+    <!-- SmartClick Tracking Script -->
+    <script src="https://cdn.jsdelivr.net/gh/casmar76/SmartClick/smc_ultra.js" data-origin-url="https://pixel.aurisens.site"></script>
+
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Inter (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (Script) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Smooth Scroll Behavior */
+        html { scroll-behavior: smooth; }
+        
+        /* Custom Colors */
+        .text-primary { color: #1A4057; }
+        .bg-primary { background-color: #1A4057; }
+        .border-primary { border-color: #1A4057; }
+        .hover-bg-primary:hover { background-color: #153345; }
+        .text-accent { color: #328BB9; }
+        .border-accent { border-color: #328BB9; }
+        .bg-accent-light { background-color: rgba(50, 139, 185, 0.1); }
+        
+        /* Utility to hide elements */
+        .hidden-section { display: none; }
+
+        /* --- BOTÕES IDÊNTICOS --- */
+        .btn-primary {
+            background-color: #1A4057;
+            color: white;
+            border-radius: 9999px; /* Rounded Full */
+            font-weight: 700; /* Bold */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow XL */
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-primary:hover {
+            background-color: #153345;
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Shadow 2XL */
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #374151; /* Gray 700 */
+            border: 2px solid #E5E7EB; /* Gray 200 */
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-secondary:hover {
+            border-color: #328BB9;
+            color: #328BB9;
+            background-color: #F8FAFC;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 selection:bg-blue-100 selection:text-blue-900 flex flex-col min-h-screen">
+
+    <!-- ================= NAVBAR (GLOBAL) ================= -->
+    <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100 transition-all shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo (Clicar volta para Home) -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="showHome()">
+                    <img 
+                        src="images/logo.webp" 
+                        alt="AvenaGLP Logo" 
+                        class="h-10 w-auto object-contain"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                    >
+                    <!-- Fallback -->
+                    <div class="hidden w-10 h-10 bg-[#328BB9] rounded-lg items-center justify-center text-white font-bold text-xl">A</div>
+                    <span class="font-bold text-xl text-primary tracking-tight ml-2">AvenaGLP</span>
+                </div>
+                
+                <!-- Menu Desktop -->
+                <div class="hidden md:flex items-center space-x-8">
+                   <div class="flex space-x-8 text-sm font-medium text-gray-600">
+                     <span class="hover:text-[#328BB9] cursor-pointer" onclick="showHome()">Home</span>
+                     <span class="hover:text-[#328BB9] cursor-pointer">The Science</span>
+                     <span class="hover:text-[#328BB9] cursor-pointer">How It Works</span>
+                   </div>
+                   <!-- BOTÃO NAVBAR -->
+                   <button onclick="showHome(); setTimeout(scrollToStep1, 100)" class="btn-primary px-6 py-2.5 text-sm">
+                     Select Your Country <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                   </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= CONTEÚDO DINÂMICO ================= -->
+    <main id="app-content" class="flex-grow">
+        
+        <!-- :::::: VIEW: HOME (O Funil Principal) :::::: -->
+        <div id="home-view">
+            <!-- HERO SECTION -->
+            <section class="relative overflow-hidden bg-white pt-16 pb-12 lg:pt-24 text-center">
+                
+                <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary tracking-tight leading-[1.15] mb-6">
+                      Reset Your Metabolism.<br />
+                      <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#328BB9] to-[#1A4057]">
+                        Start in the Way That Feels Right.
+                      </span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto">
+                      Your body <strong>changes over time</strong> — and so does the way it responds to food, energy, and weight control. That’s why <strong>choosing the right approach matters</strong>.
+                    </p>
+
+                    <div class="mb-12">
+                        <!-- BOTÃO HERO -->
+                        <button onclick="scrollToStep1()" class="btn-primary px-10 py-5 text-lg">
+                            Select Your Country <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <!-- IMAGEM FRASCO -->
+                    <div class="relative z-10 mb-12">
+                        <img 
+                            src="images/frasco.webp" 
+                            alt="AvenaGLP Frasco" 
+                            class="relative mx-auto w-64 md:w-80 object-contain drop-shadow-2xl"
+                            onerror="this.src='https://placehold.co/300x400/transparent/1A4057?text=images/frasco.webp';"
+                        >
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl w-full px-4 mb-16">
+                        <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/50 border border-gray-100/50 shadow-sm">
+                            <span class="text-4xl sm:text-5xl font-extrabold text-primary">95%</span>
+                            <span class="text-sm font-medium text-gray-600 mt-2">Satisfaction rate</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/50 border border-gray-100/50 shadow-sm">
+                            <span class="text-4xl sm:text-5xl font-extrabold text-primary">4.9/5</span>
+                            <div class="flex gap-1 mt-2 mb-1 text-[#328BB9]">
+                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                                 <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            </div>
+                            <span class="text-sm font-medium text-gray-600">Average rating</span>
+                        </div>
+                        <div class="flex flex-col items-center justify-center p-4 rounded-2xl bg-white/50 border border-gray-100/50 shadow-sm">
+                            <span class="text-4xl sm:text-5xl font-extrabold text-primary">89%</span>
+                            <span class="text-sm font-medium text-gray-600 mt-2">Repeat purchase</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WELLNESS ICONS -->
+            <div class="bg-white py-16 border-t border-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-wrap justify-center gap-10 md:gap-16 lg:gap-20">
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="leaf" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">Vegan</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="zap" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">Energy</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="dna" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">GMO Free</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="flame" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">Metabolism</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="wheat-off" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">Gluten Free</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-4 group">
+                            <div class="p-1 rounded-full"><i data-lucide="scale" class="w-9 h-9 text-[#1E73BE]" stroke-width="1.2"></i></div>
+                            <span class="text-sm font-bold text-black tracking-wide">Weight-loss</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STEP 1: COUNTRY SELECTOR -->
+            <section id="step-1-country" class="bg-gray-50 py-20 border-y border-gray-100 scroll-mt-20">
+                <div class="max-w-5xl mx-auto px-4 text-center">
+                    <div class="flex items-center justify-center gap-2 mb-6 text-primary font-bold text-lg tracking-tight">
+                        <i data-lucide="map-pin" class="text-accent w-5 h-5"></i> Check Availability
+                    </div>
+                    
+                    <h2 class="text-3xl font-bold text-primary mb-8">Where are you shipping to?</h2>
+
+                    <div id="country-grid" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                        <!-- DE - German Flow -->
+                        <button onclick="selectCountry('de')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="de">
+                            <img src="https://flagcdn.com/w160/de.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="DE">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Germany</span>
+                            <span class="bg-green-50 text-green-700 border border-green-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span>High Stock</span>
+                        </button>
+                        
+                        <!-- AT - German Flow -->
+                        <button onclick="selectCountry('at')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="at">
+                            <img src="https://flagcdn.com/w160/at.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="AT">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Austria</span>
+                            <span class="bg-orange-50 text-orange-700 border border-orange-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span>Low Stock</span>
+                        </button>
+                        
+                        <!-- CH (DE) - German Flow -->
+                        <button onclick="selectCountry('ch_de')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="ch_de">
+                            <img src="https://flagcdn.com/w160/ch.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="CH-DE">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Switzerland (DE)</span>
+                            <span class="bg-red-50 text-red-700 border border-red-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span>Low Stock</span>
+                        </button>
+                        
+                        <!-- CH (FR) - French Flow -->
+                         <button onclick="selectCountry('ch_fr')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="ch_fr">
+                            <img src="https://flagcdn.com/w160/ch.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="CH-FR">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Suisse (FR)</span>
+                            <span class="bg-red-50 text-red-700 border border-red-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-500"></span>Low Stock</span>
+                        </button>
+                        
+                        <!-- FR - French Flow -->
+                        <button onclick="selectCountry('fr')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="fr">
+                            <img src="https://flagcdn.com/w160/fr.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="FR">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">France</span>
+                            <span class="bg-green-50 text-green-700 border border-green-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span>High Stock</span>
+                        </button>
+                        
+                        <!-- BE - French Flow -->
+                        <button onclick="selectCountry('be')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="be">
+                            <img src="https://flagcdn.com/w160/be.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="BE">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Belgium</span>
+                            <span class="bg-green-50 text-green-700 border border-green-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span>High Stock</span>
+                        </button>
+                        
+                        <!-- IT - Italy Flow -->
+                        <button onclick="selectCountry('it')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="it">
+                            <img src="https://flagcdn.com/w160/it.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="IT">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Italy</span>
+                            <span class="bg-green-50 text-green-700 border border-green-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-green-500"></span>High Stock</span>
+                        </button>
+                        
+                        <!-- SE - Sweden Flow -->
+                        <button onclick="selectCountry('se')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="se">
+                            <img src="https://flagcdn.com/w160/se.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="SE">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Sweden</span>
+                            <span class="bg-orange-50 text-orange-700 border border-orange-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span>Low Stock</span>
+                        </button>
+                        
+                        <!-- FI - Finland Flow -->
+                         <button onclick="selectCountry('fi')" class="country-btn group flex flex-col items-center p-4 bg-white border-2 border-gray-200 rounded-xl hover:border-[#328BB9] hover:bg-blue-50/10 transition-all shadow-sm active:scale-95" data-country="fi">
+                            <img src="https://flagcdn.com/w160/fi.png" class="w-16 h-auto mb-3 rounded-md shadow-sm border border-gray-100" alt="FI">
+                            <span class="text-lg font-bold text-gray-800 group-hover:text-primary mb-2">Finland</span>
+                            <span class="bg-orange-50 text-orange-700 border border-orange-100 text-xs font-bold px-2 py-1 rounded-full flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-orange-500"></span>Low Stock</span>
+                        </button>
+                    </div>
+                    
+                    <div class="flex justify-center gap-6 text-xs text-gray-500 font-bold uppercase tracking-wider">
+                        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-4 h-4 text-accent"></i> Fast delivery</span>
+                        <span class="flex items-center gap-1"><i data-lucide="check-circle" class="w-4 h-4 text-accent"></i> Localized experience</span>
+                        <span class="flex items-center gap-1"><i data-lucide="shield-check" class="w-4 h-4 text-accent"></i> Secure checkout</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 2: DECISION PATH -->
+            <section id="step-2-decision" class="py-20 bg-white px-4 scroll-mt-20 hidden-section fade-in">
+                <div class="max-w-5xl mx-auto">
+                    <div class="text-center mb-16">
+                        <div class="inline-block bg-accent-light text-primary px-4 py-1 rounded-full text-sm font-bold mb-4">Step 2: Choose your path</div>
+                        <h2 class="text-3xl font-bold text-primary sm:text-4xl mb-4 tracking-tight">How Would You Like to Continue?</h2>
+                        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                           There’s no single “right” way to begin. <span class="text-primary font-bold">Choose what feels right for you.</span>
+                        </p>
+                    </div>
+            
+                    <div class="grid md:grid-cols-2 gap-8 items-stretch justify-center" id="options-container">
+                        <!-- OPTION 1: DTC (Compra Direta) -->
+                        <div id="dtc-card" class="group bg-white rounded-2xl p-8 border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-300 relative flex flex-col transform hover:-translate-y-1">
+                            <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl rounded-tr-xl">MOST POPULAR</div>
+                            <div class="mb-8">
+                                <span class="text-xs font-bold text-primary tracking-widest uppercase bg-accent-light px-2 py-1 rounded">Option 1</span>
+                                <h3 class="text-2xl font-bold text-primary mt-4 mb-2">I’m ready to begin</h3>
+                                <p class="text-gray-600 leading-relaxed">You <strong>don’t want another complicated routine</strong> — just a <strong>natural solution</strong> that fits into your day.</p>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-accent-light rounded-full p-0.5"><i data-lucide="check-circle" class="w-4 h-4 text-primary"></i></div> <strong>Access today’s exclusive offer</strong></li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-accent-light rounded-full p-0.5"><i data-lucide="check-circle" class="w-4 h-4 text-primary"></i></div> <strong>Limited-time discount</strong> available</li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-accent-light rounded-full p-0.5"><i data-lucide="check-circle" class="w-4 h-4 text-primary"></i></div> <strong>Simple daily routine</strong></li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-accent-light rounded-full p-0.5"><i data-lucide="check-circle" class="w-4 h-4 text-primary"></i></div> <strong>Trusted by thousands</strong></li>
+                            </ul>
+                            <!-- BOTÃO DTC -->
+                            <a id="btn-dtc" href="#" class="btn-primary w-full py-4 text-lg">
+                                Get Today’s Discount <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                            </a>
+                            <p class="text-center text-xs text-gray-400 mt-4 font-medium">Secure checkout · No commitment</p>
+                        </div>
+            
+                        <!-- OPTION 2: QUIZ -->
+                        <div id="quiz-card" class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col">
+                             <div class="mb-8">
+                                <span class="text-xs font-bold text-gray-500 tracking-widest uppercase bg-gray-100 px-2 py-1 rounded">Option 2</span>
+                                <h3 class="text-2xl font-bold text-primary mt-4 mb-2">Help me decide</h3>
+                                <p class="text-gray-600 leading-relaxed">Take a moment to <strong>understand how your metabolism works</strong>. See if AvenaGLP fits your goals.</p>
+                            </div>
+                            <ul class="space-y-4 mb-8 flex-1">
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-gray-100 rounded-full p-0.5"><i data-lucide="help-circle" class="w-4 h-4 text-gray-600"></i></div> Takes about <strong>1 minute</strong></li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-gray-100 rounded-full p-0.5"><i data-lucide="help-circle" class="w-4 h-4 text-gray-600"></i></div> <strong>Simple, easy questions</strong></li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-gray-100 rounded-full p-0.5"><i data-lucide="help-circle" class="w-4 h-4 text-gray-600"></i></div> <strong>No obligation</strong></li>
+                                <li class="flex items-center gap-3 text-gray-700 font-medium"><div class="bg-gray-100 rounded-full p-0.5"><i data-lucide="help-circle" class="w-4 h-4 text-gray-600"></i></div> <strong>Personalized result</strong></li>
+                            </ul>
+                            <!-- BOTÃO QUIZ (Secondary Style) -->
+                            <a id="btn-quiz" href="#" class="btn-secondary w-full py-4 text-lg">
+                                Take the 1-Minute Quiz <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                            </a>
+                            <p class="text-center text-xs text-gray-400 mt-4 font-medium">Private · Informational · Instant result</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOCIAL PROOF -->
+            <section class="py-20 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold text-primary tracking-tight">Why Thousands Choose AvenaGLP</h2>
+                        <p class="mt-4 text-lg text-gray-600">Created to <strong>support the body</strong> — not fight against it.</p>
+                    </div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-4 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-accent-light text-primary rounded-xl flex items-center justify-center"><i data-lucide="leaf" class="w-6 h-6"></i></div>
+                            <span class="font-bold text-primary">Plant-based ingredients</span>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-4 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-accent-light text-primary rounded-xl flex items-center justify-center"><i data-lucide="droplet" class="w-6 h-6"></i></div>
+                            <span class="font-bold text-primary">No artificial additives</span>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-4 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-accent-light text-primary rounded-xl flex items-center justify-center"><i data-lucide="zap" class="w-6 h-6"></i></div>
+                            <span class="font-bold text-primary">Supports metabolism</span>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-4 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-accent-light text-primary rounded-xl flex items-center justify-center"><i data-lucide="smile" class="w-6 h-6"></i></div>
+                            <span class="font-bold text-primary">Easy-to-take gummies</span>
+                        </div>
+                    </div>
+                    <div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl border border-gray-100 text-center shadow-lg relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-2 h-full bg-[#328BB9]"></div>
+                        <p class="text-xl text-gray-800 font-medium italic leading-relaxed">"Designed for <strong>long-term support</strong>, not quick fixes. Many people notice that when their <strong>metabolism feels supported</strong>, making <strong>healthier choices becomes easier</strong>."</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- :::::: VIEW: LEGAL PAGES (ESCONDIDO POR PADRÃO) :::::: -->
+        <!-- Privacy Policy -->
+        <div id="page-privacy" class="hidden-section bg-white pt-16 pb-20 px-4">
+            <div class="max-w-3xl mx-auto">
+                <button onclick="showHome()" class="flex items-center gap-2 text-[#328BB9] font-bold mb-8 hover:underline">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                </button>
+                <h1 class="text-4xl font-extrabold text-primary mb-6">Privacy Policy</h1>
+                <div class="prose prose-blue text-gray-600">
+                    <p>Last updated: June 2025</p>
+                    <p>At AvenaGLP, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Information Collection</h3>
+                    <p>We collect information that you voluntarily provide to us when you register on the website, express an interest in obtaining information about us or our products, or otherwise when you contact us.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Use of Information</h3>
+                    <p>We use the information we collect to operate, maintain, and improve our services, to respond to your comments and questions, and to send you related information including confirmations and invoices.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terms of Service -->
+        <div id="page-terms" class="hidden-section bg-white pt-16 pb-20 px-4">
+             <div class="max-w-3xl mx-auto">
+                <button onclick="showHome()" class="flex items-center gap-2 text-[#328BB9] font-bold mb-8 hover:underline">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                </button>
+                <h1 class="text-4xl font-extrabold text-primary mb-6">Terms of Service</h1>
+                <div class="prose prose-blue text-gray-600">
+                    <p>Last updated: June 2025</p>
+                    <p>Please read these Terms of Service ("Terms", "Terms of Service") carefully before using the AvenaGLP website.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Conditions of Use</h3>
+                    <p>By using this website, you certify that you have read and reviewed this Agreement and that you agree to comply with its terms. If you do not want to be bound by the terms of this Agreement, you are advised to stop using the website accordingly.</p>
+                    <h3 class="text-xl font-bold text-gray-800 mt-6 mb-2">Intellectual Property</h3>
+                    <p>You agree that all materials, products, and services provided on this website are the property of AvenaGLP, its affiliates, directors, officers, employees, agents, suppliers, or licensors including all copyrights, trade secrets, trademarks, patents, and other intellectual property.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div id="page-contact" class="hidden-section bg-white pt-16 pb-20 px-4">
+             <div class="max-w-3xl mx-auto">
+                <button onclick="showHome()" class="flex items-center gap-2 text-[#328BB9] font-bold mb-8 hover:underline">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+                </button>
+                <h1 class="text-4xl font-extrabold text-primary mb-6">Contact Us</h1>
+                <div class="prose prose-blue text-gray-600">
+                    <p class="mb-6">Have questions? We're here to help! Reach out to our support team and we'll get back to you as soon as possible.</p>
+                    
+                    <div class="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="bg-blue-100 p-2 rounded-lg text-primary"><i data-lucide="mail" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Email Us</h4>
+                                <p>support@avenaglp.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-blue-100 p-2 rounded-lg text-primary"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                            <div>
+                                <h4 class="font-bold text-gray-900">Working Hours</h4>
+                                <p>Mon - Fri: 9:00 AM - 6:00 PM (CET)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ================= FOOTER (GLOBAL) ================= -->
+    <footer class="bg-gray-900 text-gray-400 py-16 text-center text-sm px-4 mt-auto">
+        <div class="max-w-3xl mx-auto space-y-6">
+            <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mx-auto mb-6">
+               <span class="text-white font-bold text-xl">A</span>
+            </div>
+            
+            <p class="leading-relaxed max-w-2xl mx-auto">
+              AvenaGLP is intended for adults only. Not recommended for individuals under 18. If you are pregnant, breastfeeding, taking medication, or have a medical condition, consult a healthcare professional before use.
+            </p>
+            
+            <div class="pt-8 border-t border-gray-800 mt-8 flex justify-center gap-8 font-medium">
+              <!-- LINKS QUE ABREM AS "PÁGINAS" INTERNAS -->
+              <a href="#" onclick="openLegalPage('privacy'); return false;" class="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" onclick="openLegalPage('terms'); return false;" class="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" onclick="openLegalPage('contact'); return false;" class="hover:text-white transition-colors">Contact</a>
+            </div>
+            <p class="pt-2 text-gray-600">© 2024 AvenaGLP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // Inicializa Icones Lucide
+        lucide.createIcons();
+
+        // Variável global para armazenar seleção
+        let selectedCountryCode = null;
+
+        // Configuração de Links por País e Fluxos
+        const countryConfig = {
+            'se': { // Suécia - SEM DTC
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q831KC7/',
+                dtc: null 
+            },
+            'it': { // Itália - UID 45408
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q81LNLL/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q81LNLL/?uid=45408'
+            },
+            'fi': { // Finlândia - UID 45406
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7WSX5D/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7WSX5D/?uid=45406'
+            },
+            // French Flow (FR, BE, CH_FR) - UID 45404
+            'fr': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/?uid=45404'
+            },
+            'be': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/?uid=45404'
+            },
+            'ch_fr': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7TG2DR/?uid=45404'
+            },
+            // German Flow (DE, AT, CH_DE) - UID 45402
+            'de': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/?uid=45402'
+            },
+            'at': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/?uid=45402'
+            },
+            'ch_de': {
+                quiz: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/',
+                dtc: 'https://www.fasttrack36.com/PHPWHDRK/2Q7S35N6/?uid=45402'
+            }
+        };
+
+        function scrollToStep1() {
+            document.getElementById('step-1-country').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Função Principal de Seleção de País
+        function selectCountry(countryCode) {
+            console.log("País selecionado:", countryCode);
+            selectedCountryCode = countryCode;
+            const config = countryConfig[countryCode];
+
+            // 1. Destaque Visual no Grid de Países
+            document.querySelectorAll('.country-btn').forEach(btn => {
+                btn.classList.remove('border-[#328BB9]', 'bg-blue-50/10', 'ring-2', 'ring-[#328BB9]');
+                if (btn.dataset.country === countryCode) {
+                    btn.classList.add('border-[#328BB9]', 'bg-blue-50/10', 'ring-2', 'ring-[#328BB9]');
+                }
+            });
+
+            // 2. Configurar Botões da Etapa 2
+            const dtcCard = document.getElementById('dtc-card');
+            const quizCard = document.getElementById('quiz-card');
+            const optionsContainer = document.getElementById('options-container');
+
+            const btnDtc = document.getElementById('btn-dtc');
+            const btnQuiz = document.getElementById('btn-quiz');
+
+            // Configurar Links
+            btnQuiz.href = config.quiz;
+            
+            // Regra da Suécia (SE): Esconder opção de Compra Direta
+            if (config.dtc === null) {
+                dtcCard.style.display = 'none'; // Some o card DTC
+                
+                // Ajusta layout para centralizar o Quiz
+                optionsContainer.classList.remove('md:grid-cols-2');
+                optionsContainer.classList.add('flex', 'justify-center');
+                quizCard.classList.add('max-w-md', 'w-full');
+            } else {
+                dtcCard.style.display = 'flex'; // Exibe o card DTC
+                btnDtc.href = config.dtc;
+                
+                // Restaura o Grid de 2 colunas
+                optionsContainer.classList.add('md:grid-cols-2');
+                optionsContainer.classList.remove('flex', 'justify-center');
+                quizCard.classList.remove('max-w-md');
+            }
+
+            // 3. Exibir Etapa 2 e Rolar
+            const step2 = document.getElementById('step-2-decision');
+            step2.classList.remove('hidden-section');
+            setTimeout(() => {
+                step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
+
+        // --- SISTEMA DE "PÁGINAS" INTERNAS (SPA) ---
+        
+        function hideAllViews() {
+            // Esconde Home
+            document.getElementById('home-view').style.display = 'none';
+            // Esconde Páginas Legais
+            document.getElementById('page-privacy').classList.add('hidden-section');
+            document.getElementById('page-terms').classList.add('hidden-section');
+            document.getElementById('page-contact').classList.add('hidden-section');
+        }
+
+        function showHome() {
+            hideAllViews();
+            document.getElementById('home-view').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        function openLegalPage(pageName) {
+            hideAllViews();
+            
+            // Mostra a página específica
+            const pageId = 'page-' + pageName;
+            const page = document.getElementById(pageId);
+            if(page) {
+                page.classList.remove('hidden-section');
+            }
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+    </script>
+</body>
+</html>
